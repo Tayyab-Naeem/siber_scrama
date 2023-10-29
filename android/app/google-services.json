@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "606828737906",
+    "project_id": "sibarscrama",
+    "storage_bucket": "sibarscrama.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:606828737906:android:8d7ec14d9c53b3ed60d9eb",
+        "android_client_info": {
+          "package_name": "com.example.siber_scrama"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6gtnVic7j-DAb3vVAhzsU00STrXsy078"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
