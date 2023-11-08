@@ -1,7 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:contacts_service/contacts_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:siber_scrama/Screens/contact_page/contact_page.dart';
 import 'package:siber_scrama/Screens/login/login.dart';
 
 import '../map_screen/map_screen.dart';
@@ -14,6 +15,28 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  void storeContactsInFirestore() async {
+    Iterable<Contact> contacts = await ContactsService.getContacts();
+    String userUid = FirebaseAuth.instance.currentUser!.uid;
+    CollectionReference users = FirebaseFirestore.instance.collection('users');
+    await users.doc(userUid).set({
+      'contacts': contacts.map((contact) {
+        return {
+          'displayName': contact.displayName,
+          'phoneNumbers': contact.phones!.map((phone) {
+            return phone.value;
+          }).toList(),
+        };
+      }).toList(),
+    }, SetOptions(merge: true));
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Contacts stored in Database'),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,11 +94,7 @@ class _HomePageState extends State<HomePage> {
               onPressed: () async {
                 var status = await Permission.contacts.request();
                 if (status.isGranted) {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const ContactsPage()),
-                  );
+                  storeContactsInFirestore();
                 } else {
                   const Center(
                     child: CircularProgressIndicator(

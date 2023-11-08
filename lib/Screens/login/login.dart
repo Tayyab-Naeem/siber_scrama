@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:siber_scrama/Screens/home_page/home_page.dart';
-import 'package:siber_scrama/Screens/register/register.dart';
-import 'package:siber_scrama/auth_methods/auth_methods.dart';
 import 'package:siber_scrama/components/background.dart';
 import 'package:siber_scrama/utils/utils.dart';
+
+import '../../auth_methods/auth_methods.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -142,10 +142,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
                 child: CupertinoButton(
                   onPressed: () => {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const RegisterScreen()))
+                    // Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //         builder: (context) => const RegisterScreen()))
                   },
                   child: const Text(
                     "Don't Have an Account? Sign up",
